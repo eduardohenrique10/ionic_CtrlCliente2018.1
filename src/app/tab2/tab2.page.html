@@ -9,7 +9,7 @@
 <ion-content>
   <!-- Inputs with labels -->
   <ion-item>
-    <ion-label>Nome</ion-label>
+    <ion-label position="floating">Nome</ion-label>
     <ion-input [(ngModel)]="cliente.nome"></ion-input>
   </ion-item>
 
@@ -19,13 +19,8 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="fixed">Senha</ion-label>
+    <ion-label position="floating">Senha</ion-label>
     <ion-input [(ngModel)]="cliente.pws"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="stacked">Confirma Senha</ion-label>
-    <ion-input [(ngModel)]="confPws" inputmode="password"></ion-input>
   </ion-item>
 
   <ion-button (click)="addCliente(cliente)">Salvar</ion-button>
