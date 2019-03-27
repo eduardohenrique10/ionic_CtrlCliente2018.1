@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      Lista de Clientes
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+<ion-item *ngFor="let c of clientes">
+  <ion-label>
+    {{ c.none }} - {{ c.email }}
+  </ion-label>
+</ion-item>
+
+</ion-content>

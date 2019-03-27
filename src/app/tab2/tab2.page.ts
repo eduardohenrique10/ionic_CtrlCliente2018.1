@@ -1,6 +1,7 @@
 import { Cliente } from './../cliente/cliente.model';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { ClienteService } from '../cliente/cliente.service';
 
 @Component({
   selector: 'app-tab2',
@@ -9,19 +10,49 @@ import { AlertController } from '@ionic/angular';
 })
 
 export class Tab2Page {
-  cliente: Cliente = new Cliente();
-  clientes: Cliente[] = [];
-  confPws: string = "";
+  cliente: Cliente;
+  //clientes: Cliente[] = [];
+  confPws: string;
 
-  constructor() {
+  constructor(
+    public alertController: AlertController,
+    private clienteService: ClienteService) {
     this.cliente = new Cliente;
   }
 
   addCliente(cliente: Cliente) {
-    this.clientes.push(cliente);
+    try {
+      this.cliente.validar(this.confPws);
+    
+    //this.clientes.push(cliente);
+    this.clienteService.addCliente(cliente);
+
     this.cliente = new Cliente;
-    console.log(this.clientes);
+    this.confPws = "";
+
+
+    this.presentAlert("AVISO", "Cadastrado", "sucesss");
+    
+  }
+  catch (erros) {
+    this.presentAlert("ERRO", erros, "danger");
   }
 
+
 }
+  async presentAlert (tipo: string, texto: string, cor: string) {
+    const alert = await this.alertController.create({
+      header: tipo,
+      //subHeader: 'Subtitle',
+      message: texto,
+      cssClass: cor,
+      buttons: ['OK']
+    }); 
+
+    await alert.present();
+    }
+  }
+
+
+
 
